@@ -1,0 +1,57 @@
+@import "@citolab/qti-components/item.css";
+
+.qti-stats-preview {
+  --qti-form-size: 1rem;
+  --qti-border-color: #cbd5e1;
+  --qti-border-active: #2563eb;
+  --qti-correct: #16a34a;
+  width: 100%;
+  color: #0f172a;
+}
+
+.qti-stats-preview qti-assessment-item,
+.qti-stats-preview qti-item-body,
+.qti-stats-preview qti-choice-interaction-stats {
+  display: block;
+  width: 100%;
+}
+
+.qti-stats-preview--compact {
+  --qti-form-size: 0.85rem;
+  font-size: 12px;
+}
+
+.qti-stats-preview--compact qti-simple-choice-stats {
+  margin-bottom: 2px;
+}
+
+.qti-stats-preview--compact .qti-review-inline-stat__track {
+  min-width: 64px !important;
+  width: 64px !important;
+  height: 10px !important;
+}
+
+.qti-stats-preview--compact .qti-review-inline-stat__n {
+  font-size: 11px !important;
+}
+
+.qti-stats-preview--compact qti-extended-text-interaction-stats {
+  display: block;
+}
+
+.qti-stats-preview--compact qti-extended-text-interaction-stats[stats-only] [part='textarea'] {
+  background: #f8fafc;
+}
+
+.qti-stats-preview--compact qti-extended-text-interaction-stats[stats-only] .qti-stats-panel__row {
+  margin-bottom: 0.2rem;
+}
+
+.qti-stats-preview--compact qti-extended-text-interaction-stats[stats-only] .qti-stats-panel__label {
+  font-size: 11px;
+  min-width: 0.75rem;
+}
+
+.qti-stats-preview--card {
+  pointer-events: none;
+}

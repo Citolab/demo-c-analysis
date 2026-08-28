@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "citolab-pt-prototypes"
+  },
+  "targets": {
+    "citolab-pt-prototypes": {
+      "hosting": {
+        "c-analysis": [
+          "citolab-c-analysis"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
