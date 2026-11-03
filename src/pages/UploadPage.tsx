@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FileSpreadsheet, FileJson, BarChart3, Globe, Loader2, AlertTriangle, Download } from "lucide-react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
@@ -41,6 +41,8 @@ export function UploadPage() {
   const [warnings, setWarnings] = useState<string[]>([])
 
   const [importErrors, setImportErrors] = useState<string[]>([])
+  const excelInputRef = useRef<HTMLInputElement>(null)
+  const jsonInputRef = useRef<HTMLInputElement>(null)
 
   const handleAnalysis = (analysis: AnalysisSet, skipWarnings = false) => {
     setImportErrors([])
@@ -228,39 +230,51 @@ export function UploadPage() {
                 {t("GENERAL_EXAMPLE")}
               </Button>
 
-              <label className="flex w-full cursor-pointer">
-                <input
-                  type="file"
-                  accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                  className="hidden"
-                  disabled={processing}
-                  onChange={(event) => {
-                    const file = event.target.files?.[0]
-                    if (file) void loadExcelFile(file)
-                  }}
-                />
-                <Button variant="outline" className="w-full" type="button" disabled={processing}>
-                  <FileSpreadsheet className="mr-2 h-4 w-4" />
-                  {t("PAGE_UPLOAD_BUTTON_SELECT_EXCEL")}
-                </Button>
-              </label>
+              <input
+                ref={excelInputRef}
+                type="file"
+                accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                className="hidden"
+                disabled={processing}
+                onChange={(event) => {
+                  const file = event.target.files?.[0]
+                  event.target.value = ""
+                  if (file) void loadExcelFile(file)
+                }}
+              />
+              <Button
+                variant="outline"
+                className="w-full"
+                type="button"
+                disabled={processing}
+                onClick={() => excelInputRef.current?.click()}
+              >
+                <FileSpreadsheet className="mr-2 h-4 w-4" />
+                {t("PAGE_UPLOAD_BUTTON_SELECT_EXCEL")}
+              </Button>
 
-              <label className="flex w-full cursor-pointer">
-                <input
-                  type="file"
-                  accept="application/json,.json"
-                  className="hidden"
-                  disabled={processing}
-                  onChange={(event) => {
-                    const file = event.target.files?.[0]
-                    if (file) void loadJsonFile(file)
-                  }}
-                />
-                <Button variant="outline" className="w-full" type="button" disabled={processing}>
-                  <FileJson className="mr-2 h-4 w-4" />
-                  Import analysis JSON
-                </Button>
-              </label>
+              <input
+                ref={jsonInputRef}
+                type="file"
+                accept="application/json,.json"
+                className="hidden"
+                disabled={processing}
+                onChange={(event) => {
+                  const file = event.target.files?.[0]
+                  event.target.value = ""
+                  if (file) void loadJsonFile(file)
+                }}
+              />
+              <Button
+                variant="outline"
+                className="w-full"
+                type="button"
+                disabled={processing}
+                onClick={() => jsonInputRef.current?.click()}
+              >
+                <FileJson className="mr-2 h-4 w-4" />
+                Import analysis JSON
+              </Button>
 
               <div className="flex flex-wrap gap-2">
                 <a
